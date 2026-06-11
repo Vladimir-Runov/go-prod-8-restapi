@@ -4,32 +4,31 @@
 # Installation
 
 ```  
- cd путь_кпапке
+ on main folder
  go work init
  go mod init go-prod-8-restapi
  go mod tidy
 
- go run main.go
+```
  go run ./cmd/server/main.go
  go build ./...
 ```
 cd C:\Users\Admin\Documents\go\git_netology\go-prod-8-restapi
 
 goprod-8-restapi/  
-
-   go-prod-8-restapi/
-   ├── cmd/
-   │   └── server/
-   │       └── main.go
-   ├── internal/
-   │   ├── handlers/  tasks.go          // TODO: реализовать логику
-   │   ├── models/    task.go             // модель данных
-   │   └── storage/   storage.go         // интерфейс Storage
-   └── go.mod
+   go-prod-8-restapi/  
+   ├── cmd/  
+   │   └── server/  
+   │       └── main.go  
+   ├── internal/  
+   │   ├── handlers/  tasks.go  
+   │   ├── models/    task.go  
+   │   └── storage/   storage.go  
+   └── go.mod  
     
-       README.md  
+       README.md   
        go.mod  
-       test.cmd
+       test.cmd  
 
 
 ```
@@ -41,3 +40,6 @@ curl http://localhost:8088
  
  или в терминале нажать Ctrl + C. Это отправит сигнал прерывания (SIGINT) вашему приложению, и сервер завершит свою работу.
  taskkill /PID <PID> /F
+
+references:
+https://github.com/golang/go/wiki/Modules
