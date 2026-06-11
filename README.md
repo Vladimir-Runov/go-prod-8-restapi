@@ -4,7 +4,7 @@
 # Installation
 
 ```  
-cd C:\Users\Admin\Documents\go\git_netology\go-prod-8-restapi
+cd ..\go-prod-8-restapi
 
  on main folder
  go work init
@@ -103,8 +103,8 @@ curl http://localhost:8088
     2026/06/12 00:41:36 [2026-06-12T00:41:36+03:00] Request from r/a:[::1]:59398 url: /exit  
     2026/06/12 00:41:36 Server is shutting down...  
       
-![Результат выполнения](doc/screenshots/demo1.png)`
-![Результат выполнения](doc/screenshots/test_script.png)`
+![Server console output showing successful startup and request logs with timestamps and accessed URLs](doc/screenshots/demo1.png)`
+![Windows batch script showing curl commands used to test REST API endpoints and the expected response text](doc/screenshots/test_script.png)`
 
 ### references:
 https://github.com/golang/go/wiki/Modules
