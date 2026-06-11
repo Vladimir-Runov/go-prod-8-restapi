@@ -35,11 +35,11 @@ goprod-8-restapi/
 http://localhost:8088
 curl http://localhost:8088
 
+### Завершить работу сервера:  
+ http://localhost:8088/exit  
+ или отправить сигнал прерывания (SIGINT): в терминале нажать Ctrl + C.   
+ или taskkill /PID <PID> /F
+```
 
- http://localhost:8088/exit
- 
- или в терминале нажать Ctrl + C. Это отправит сигнал прерывания (SIGINT) вашему приложению, и сервер завершит свою работу.
- taskkill /PID <PID> /F
-
-references:
+### references:
 https://github.com/golang/go/wiki/Modules
