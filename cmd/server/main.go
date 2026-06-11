@@ -6,8 +6,10 @@ import (
 	"math/rand"
 
 	"go-prod-8-restapi/internal/handlers"
-	"go-prod-8-restapi/internal/models"
 	"go-prod-8-restapi/internal/storage"
+
+	//"github.com/Vladimir-Runov/go-prod-8-restapi/internal/handlers"
+	//"github.com/Vladimir-Runov/go-prod-8-restapi/internal/storage"
 
 	"net/http"
 	"os"
@@ -55,21 +57,8 @@ func main() {
 		Port:       ":8088",
 		ServerName: "srv-runov-001",
 	}
-
-	var store storage.Storage = storage.New()
-	createdTask1, err := store.Create(models.Task{Title: "задача - I", Done: false})
-	if err != nil {
-		fmt.Println("Ошибка при создании задачи 1:", err)
-		return
-	}
-	fmt.Println("Создана задача 1:", createdTask1)
-	createdTask2, err := store.Create(models.Task{Title: "задача - II", Done: false})
-	if err != nil {
-		fmt.Println("Ошибка при создании задачи 2:", err)
-		return
-	}
-	fmt.Println("Создана задача 2:", createdTask2)
-
+	store := storage.NewInMemoryStore()
+	storage.Init(store)
 	h := handlers.New(store)
 
 	mux := http.NewServeMux()

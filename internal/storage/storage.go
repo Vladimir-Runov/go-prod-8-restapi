@@ -81,3 +81,20 @@ func (m *Memory) Delete(id int) error {
 	delete(m.tasks, id)
 	return nil
 }
+
+
+func Init(store Storage) { {
+	
+	createdTask1, err := store.Create(models.Task{Title: "задача - I", Done: false})
+	if err != nil {
+		fmt.Println("Ошибка при создании задачи 1:", err)
+		return
+	}
+	fmt.Println("Создана задача 1:", createdTask1)
+	createdTask2, err := store.Create(models.Task{Title: "задача - II", Done: false})
+	if err != nil {
+		fmt.Println("Ошибка при создании задачи 2:", err)
+		return
+	}
+	fmt.Println("Создана задача 2:", createdTask2)
+}
