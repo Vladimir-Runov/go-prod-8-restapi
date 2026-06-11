@@ -2,10 +2,16 @@ package main
 
 import (
 	"fmt"
-	"go-prod-8-restapi/internal/handlers"
-	"go-prod-8-restapi/internal/storage"
 	"log"
 	"math/rand"
+
+	"go-prod-8-restapi/internal/storage"
+
+	"./go-prod-8-restapi/internal/handlers"
+
+	//"github.com/Vladimir-Runov/go-prod-8-restapi/internal/handlers"
+	//"github.com/Vladimir-Runov/go-prod-8-restapi/internal/storage"
+
 	"net/http"
 	"os"
 	"os/signal"
@@ -21,8 +27,8 @@ type Config struct {
 func exitHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Server is shutting down...")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Shutting down server...")) // Send response before exiting
-	os.Exit(0)                                 // Note: os.Exit will terminate the program immediately, so any deferred functions will not run.
+	w.Write([]byte("Shutting down server..."))
+	os.Exit(0) // Завершение работы сервера
 }
 
 func timingMiddleware(next http.Handler) http.Handler {
@@ -39,6 +45,12 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(time.Duration(20+rand.Intn(246)) * time.Microsecond)
 	fmt.Fprintf(w, "Hello, World!")
 }
+func loghandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Received %s request for %s", r.Method, r.URL.Path)
+	fmt.Printf("Received %s request for %s\n", r.Method, r.URL.Path)
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Hello, World!"))
+}
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
@@ -46,7 +58,7 @@ func main() {
 		Port:       ":8088",
 		ServerName: "srv-runov-001",
 	}
-	store := storage.New()
+	store := storage.NewInMemoryStore()
 	storage.Init(store)
 	h := handlers.New(store)
 
@@ -56,7 +68,7 @@ func main() {
 	mux.HandleFunc("/tasks", h.TasksCollection) // GET, POST
 	mux.HandleFunc("/tasks/", h.TaskItem)       // GET, PUT, DELETE
 
-	loggedMux := timingMiddleware(mux) // Оборачиваем mux в middleware для логирования и измерения времени выполнения
+	loggedMux := timingMiddleware(mux)
 	server := &http.Server{Addr: config.Port, Handler: loggedMux}
 
 	go func() {
@@ -69,9 +81,10 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
-	<-sigs // Wait for a termination signal
+	<-sigs // Ожидание сигнала
 	log.Printf("[%s] Shutting down server...", config.ServerName)
 	if err := server.Close(); err != nil {
-		log.Fatal(err) // Handle error during server shutdown
+		log.Fatal(err)
 	}
+
 }
