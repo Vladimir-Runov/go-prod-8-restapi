@@ -6,19 +6,37 @@
 ```  
  cd путь_кпапке
  go work init
+ go mod init go-prod-8-restapi
  go mod tidy
- go mod init goprod-8-dz-7
- go run main.go
 
+ go run main.go
+ go run ./cmd/server/main.go
+ go build ./...
 ```
+cd C:\Users\Admin\Documents\go\git_netology\go-prod-8-restapi
 
 goprod-8-restapi/  
-  cmd/server/main.go  
-  internal/handlers/tasks.go          // TODO: реализовать логику
-  internal/models/task.go             // модель данных
-  internal/storage/storage.go         // интерфейс Storage
-  internal/http/middleware.go         // (опционально)
-  README.md  
-  go.mod  
+
+   go-prod-8-restapi/
+   ├── cmd/
+   │   └── server/
+   │       └── main.go
+   ├── internal/
+   │   ├── handlers/  tasks.go          // TODO: реализовать логику
+   │   ├── models/    task.go             // модель данных
+   │   └── storage/   storage.go         // интерфейс Storage
+   └── go.mod
+    
+       README.md  
+       go.mod  
+       test.cmd
+
 
 ```
+
+в адресной строке  http://localhost:8088
+curl http://localhost:8088
+
+ http://localhost:8088/exit
+ Если сервер запущен в терминале, вы можете просто нажать Ctrl + C. Это отправит сигнал прерывания (SIGINT) вашему приложению, и сервер завершит свою работу.
+ taskkill /PID <PID> /F
