@@ -103,7 +103,8 @@ curl http://localhost:8088
     2026/06/12 00:41:36 [2026-06-12T00:41:36+03:00] Request from r/a:[::1]:59398 url: /exit  
     2026/06/12 00:41:36 Server is shutting down...  
       
-![Результат выполнения](doc/demo1.png)`
+![Результат выполнения](doc/screenshots/demo1.png)`
+![Результат выполнения](doc/screenshots/test_script.png)`
 
 ### references:
 https://github.com/golang/go/wiki/Modules
