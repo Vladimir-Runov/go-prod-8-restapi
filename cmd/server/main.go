@@ -34,10 +34,10 @@ func timingMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-// helloHandler обрабатывает запросы к /hello
-func helloHandler(w http.ResponseWriter, r *http.Request) {
+// aboutHandler обрабатывает запросы к /about и возвращает простое приветствие. Время ответа варьируется от 20 до 265 микросекунд, что имитирует некоторую нагрузку на сервер.
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	time.Sleep(time.Duration(20+rand.Intn(246)) * time.Microsecond)
-	fmt.Fprintf(w, "Hello, World!")
+	fmt.Fprintf(w, "o nas!")
 }
 
 func main() {
@@ -52,7 +52,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/exit", exitHandler)        //
-	mux.HandleFunc("/hello", helloHandler)      //
+	mux.HandleFunc("/about", aboutHandler)      //
 	mux.HandleFunc("/tasks", h.TasksCollection) // GET, POST
 	mux.HandleFunc("/tasks/", h.TaskItem)       // GET, PUT, DELETE
 
